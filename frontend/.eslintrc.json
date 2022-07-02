@@ -4,8 +4,10 @@
     "es2021": true
   },
   "extends": [
-    "plugin:react/recommended",
     "google",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended"
   ],
@@ -25,7 +27,15 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {},
+      {
+        "usePrettierrc": true
+      }
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "import/prefer-default-export": "off",
     "require-jsdoc": "off",
     "react/react-in-jsx-scope": "off",
