@@ -1,15 +1,19 @@
 import { useAuth } from 'hooks/useAuth';
-import { Login } from 'pages/Login';
 import type { ReactElement } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface PrivateRoute {
   component: ReactElement;
 }
 
-export function PrivateRoute({
-  component: Component,
-}: PrivateRoute): ReactElement {
+export function PrivateRoute({ component: Component }: PrivateRoute) {
   const { isLogged } = useAuth();
+  const navigate = useNavigate();
 
-  return isLogged ? Component : <Login />;
+  if (!isLogged) {
+    navigate('/');
+    return null;
+  }
+
+  return Component;
 }
