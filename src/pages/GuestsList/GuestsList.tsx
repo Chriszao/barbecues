@@ -1,8 +1,9 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from 'components/Button';
 import { Footer } from 'components/Footer';
 import { GuestForm } from 'components/Form/GuestForm';
 import { SmartForm } from 'components/Form/SmartForm';
-import type { BarbecueFormFields, Guest } from 'components/Form/types';
+import type { BarbecueFormFields } from 'components/Form/types';
 import { GuestItem } from 'components/GuestItem/GuestItem';
 import { Header } from 'components/Header';
 import { Loader } from 'components/Loader/Loader';
@@ -10,17 +11,17 @@ import type { ModalRef } from 'components/Modal';
 import { Modal } from 'components/Modal';
 import { format } from 'date-fns';
 import type { ReactElement } from 'react';
-import { useCallback } from 'react';
-import { useMemo } from 'react';
-import { useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 import { useIsFetching, useIsMutating } from 'react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { formatCurrency } from 'utils/currency';
+import * as yup from 'yup';
 
 import personsGroup from '../../assets/group.svg';
 import iconMoney from '../../assets/icon_money.svg';
 import { useGuests } from './hooks/useGuests';
 import * as S from './styles';
+import type { AddGuest } from './types';
 
 export function GuestsList(): ReactElement {
   const modalRef = useRef<ModalRef>(null);
@@ -70,7 +71,7 @@ export function GuestsList(): ReactElement {
     };
   }, [guests, sumGuestsContribution]);
 
-  function handleSubmit(data: Guest) {
+  function handleSubmit(data: AddGuest) {
     const totalContribution =
       sumGuestsContribution() +
       formatCurrency(data.contributionValue).convertToFloat();
@@ -95,10 +96,19 @@ export function GuestsList(): ReactElement {
     modalRef.current?.close();
   }
 
+  const schema = yup.object({
+    name: yup.string().required('nome do convidado é um campo obrigatório'),
+  });
+
   return (
     <S.Wrapper>
       <Modal title="Adicionar convidado" ref={modalRef}>
-        <SmartForm id="editForm" onSubmit={handleSubmit}>
+        <SmartForm<AddGuest>
+          id="editForm"
+          onSubmit={handleSubmit}
+          resolver={yupResolver(schema)}
+          defaultValues={{ contributionValue: 0, name: '' }}
+        >
           <S.FormContainer>
             <GuestForm
               contributionWithDrink={routeData.contributionWithDrink}

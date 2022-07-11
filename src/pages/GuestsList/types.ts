@@ -17,9 +17,16 @@ export interface UseGuestsProps {
 }
 
 export interface UseGuests {
-  addGuestMutation: MutationProps<Guest, Guest>;
+  addGuestMutation: MutationProps<Guest, AddGuest>;
   updateBarbecueMutation: MutationProps<BarbecueFormFields, UpdateBarbecue>;
   guests: Guest[];
   handleGuestConfirmationChange: (index: number) => void;
   isLoading: boolean;
 }
+
+export type AddGuest = {
+  barbecueId?: number;
+  name: string;
+  contributionValue: number | string;
+  isConfirmed?: boolean;
+};

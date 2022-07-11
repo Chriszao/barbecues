@@ -6,7 +6,12 @@ import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import api from 'services/api';
 
-import type { UpdateBarbecue, UseGuests, UseGuestsProps } from '../types';
+import type {
+  AddGuest,
+  UpdateBarbecue,
+  UseGuests,
+  UseGuestsProps,
+} from '../types';
 
 export function useGuests({ barbecueId }: UseGuestsProps): UseGuests {
   const [guests, setGuests] = useState<Guest[]>([]);
@@ -23,7 +28,7 @@ export function useGuests({ barbecueId }: UseGuestsProps): UseGuests {
     );
   }
 
-  const addGuest = async (data: Guest) => {
+  const addGuest = async (data: AddGuest) => {
     const response = await api.post<Guest>('/guests', {
       ...data,
       isConfirmed: true,
