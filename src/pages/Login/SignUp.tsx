@@ -24,7 +24,10 @@ export function SignUp({ handleLoginChange }: SignUpProps): ReactElement {
       handleLoginChange('signIn');
     } catch (error) {
       toast(
-        'Houve um erro interno ao criar sua conta. Revise suas informações.'
+        'Houve um erro interno ao criar sua conta. Revise suas informações.',
+        {
+          type: 'error',
+        }
       );
     }
   };
