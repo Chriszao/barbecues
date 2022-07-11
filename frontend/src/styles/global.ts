@@ -16,10 +16,24 @@ const GlobalStyles = createGlobalStyle`
       font-size: ${theme.font.sizes.medium};
     }
 
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      border-radius: 0.25rem;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #bababa;
+      border-radius: 0.25rem;
+    }
+
     #root {
       display: flex;
-      min-height: 100vh;
-      min-width: 100vw;
+      height: 100vh;
+      width: 100vw;
     }
   `}
 `;
