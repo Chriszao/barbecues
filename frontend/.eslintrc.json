@@ -40,6 +40,8 @@
     "require-jsdoc": "off",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/consistent-type-imports": "error",
+    "react/display-name": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
     "import-helpers/order-imports": [
       "warn",
       {
