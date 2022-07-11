@@ -49,31 +49,6 @@ export function GuestsList(): ReactElement {
     barbecueId: routeData.id,
   });
 
-  function handleSubmit(data: Guest) {
-    const totalContribution =
-      routeData.totalContribution +
-      formatCurrency(data.contributionValue).convertToFloat();
-
-    void addGuestMutation({
-      ...data,
-      barbecueId: routeData.id,
-      contributionValue: formatCurrency(
-        data.contributionValue
-      ).convertToFloat(),
-    });
-
-    void updateBarbecueMutation({
-      barbecueId: routeData.id as number,
-      data: {
-        ...routeData,
-        totalContribution,
-        totalGuests: routeData.totalGuests + 1,
-      },
-    });
-
-    modalRef.current?.close();
-  }
-
   const sumGuestsContribution = useCallback(() => {
     return guests.reduce((sum, guest) => {
       if (guest.contributionValue && guest.isConfirmed) {
@@ -94,6 +69,31 @@ export function GuestsList(): ReactElement {
       totalGuests,
     };
   }, [guests, sumGuestsContribution]);
+
+  function handleSubmit(data: Guest) {
+    const totalContribution =
+      sumGuestsContribution() +
+      formatCurrency(data.contributionValue).convertToFloat();
+
+    void addGuestMutation({
+      ...data,
+      barbecueId: routeData.id,
+      contributionValue: formatCurrency(
+        data.contributionValue
+      ).convertToFloat(),
+    });
+
+    void updateBarbecueMutation({
+      barbecueId: routeData.id as number,
+      data: {
+        ...routeData,
+        totalContribution,
+        totalGuests: totals.totalGuests + 1,
+      },
+    });
+
+    modalRef.current?.close();
+  }
 
   return (
     <S.Wrapper>

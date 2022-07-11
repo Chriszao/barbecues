@@ -45,6 +45,7 @@ export function useGuests({ barbecueId }: UseGuestsProps): UseGuests {
     useMutation(addGuest, {
       onSuccess: (data: Guest) => {
         queryClient.invalidateQueries(['barbecues', user.id]);
+        queryClient.invalidateQueries(['guests', barbecueId]);
         setGuests((prev) => [...prev, data]);
         toast('Convidado adicionado com sucesso!', {
           type: 'success',
