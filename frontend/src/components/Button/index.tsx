@@ -6,6 +6,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
-export function Button({ children }: ButtonProps): ReactElement {
-  return <S.Wrapper type="button">{children}</S.Wrapper>;
+export function Button({
+  children,
+  ...buttonProperties
+}: ButtonProps): ReactElement {
+  return <S.Wrapper {...buttonProperties}>{children}</S.Wrapper>;
 }
