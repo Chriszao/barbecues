@@ -1,3 +1,4 @@
+import { IconButton } from 'components/IconButton/IconButton';
 import styled, { css } from 'styled-components';
 
 import barbecuePattern from '../../assets/background-bbq-pattern.svg';
@@ -10,7 +11,7 @@ export const Wrapper = styled.div`
     background-image: url(${barbecuePattern});
     background-position: center;
 
-    height: 14rem;
+    min-height: 14rem;
     position: relative;
 
     padding-top: ${theme.spacings.xLarge};
@@ -35,5 +36,20 @@ export const BottomFade = styled.div`
 
     position: absolute;
     bottom: 0;
+  `}
+`;
+
+export const LogOutButtonContainer = styled(IconButton)`
+  ${({ theme }) => css`
+    position: absolute;
+    top: 40px;
+    right: 40px;
+
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: ${theme.colors.primaryDimmed};
+    }
   `}
 `;
