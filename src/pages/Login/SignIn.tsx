@@ -8,10 +8,10 @@ import type { ReactElement } from 'react';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import * as yup from 'yup';
 
 import type { LoginState } from '.';
 import animatedBarbecue from '../../assets/barbecue-animate-signin.svg';
+import { schema } from './constants';
 import * as S from './styles';
 
 interface SignInProps {
@@ -39,19 +39,6 @@ export function SignIn({ handleLoginChange }: SignInProps): ReactElement {
     },
     [navigate, signIn]
   );
-
-  const schema = yup
-    .object({
-      email: yup
-        .string()
-        .email('email deve ser um email válido')
-        .required('email é um campo obrigatório'),
-      password: yup
-        .string()
-        .required('senha é obrigatória')
-        .min(6, 'senha deve conter no mínimo 6 caracteres'),
-    })
-    .required();
 
   return (
     <S.LoginContainer>

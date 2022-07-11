@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from 'components/Button';
 import { SmartForm } from 'components/Form/SmartForm';
 import { TextField } from 'components/TextField';
@@ -8,6 +9,7 @@ import api from 'services/api';
 
 import type { LoginState } from '.';
 import animatedBarbecue from '../../assets/barbecue-animate-signup.svg';
+import { schema } from './constants';
 import * as S from './styles';
 
 interface SignUpProps {
@@ -50,7 +52,7 @@ export function SignUp({ handleLoginChange }: SignUpProps): ReactElement {
             id="meu-form"
             onSubmit={handleSubmit}
             defaultValues={{ email: '', password: '' }}
-            // resolver={yupResolver(schema)}
+            resolver={yupResolver(schema)}
           >
             <TextField type="text" name="email" placeholder="Email" />
             <TextField type="password" name="password" placeholder="Senha" />
