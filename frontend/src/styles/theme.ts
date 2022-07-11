@@ -24,6 +24,7 @@ export default {
     white: '#FFFFFF',
     black: '#000000',
     lightGray: '#F1F1F1',
+    error: '#FF392E',
   },
   spacings: {
     medium: '1.5rem',
