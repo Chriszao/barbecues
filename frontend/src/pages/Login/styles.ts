@@ -112,3 +112,15 @@ export const LoginFooter = styled.footer`
     margin-top: 2rem;
   }
 `;
+
+export const SignUpButton = styled.p`
+  ${({ theme }) => css`
+    font-size: ${theme.font.sizes.small};
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: ${theme.colors.primaryDimmed};
+      cursor: pointer;
+    }
+  `}
+`;
